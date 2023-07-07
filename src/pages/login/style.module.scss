@@ -1,0 +1,85 @@
+@use "../../@shared/styles/mixin/fontSize";
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: fit-content;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.title {
+  @include fontSize.fontSize(24, 500);
+  margin-bottom: 24px;
+}
+
+.forgot {
+  @include fontSize.fontSize(12, 400);
+  margin: 8px 0;
+  color: var(--GRAY6);
+  cursor: pointer;
+}
+
+.submit {
+  @include fontSize.fontSize(16, 400);
+  width: 100%;
+  height: 48px;
+  margin: 24px 0 16px;
+  color: var(--WHITE);
+  cursor: pointer;
+  background-color: var(--BLUE7);
+  border: none;
+  border-radius: 8px;
+}
+
+.signup {
+  color: var(--GRAY7);
+
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+%input-size {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 16px;
+}
+
+.inputContainer {
+  position: relative;
+  @extend %input-size;
+
+  input {
+    @include fontSize.fontSize(14, 400);
+    @extend %input-size;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--GRAY9);
+    outline: none;
+
+    &:focus,
+    &:valid {
+      border-color: var(--BLUE6);
+
+      + .label {
+        font-size: 14px;
+        color: var(--BLUE6);
+        transform: translateY(-45%);
+      }
+    }
+  }
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 48px;
+  transition: 0.2s;
+}
