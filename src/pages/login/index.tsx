@@ -1,28 +1,34 @@
 "use client";
 
-import styles from "./style.module.scss";
+import style from "./style.module.scss";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
-import { getAccessToken } from "./utils/service";
-import { TInput } from "./utils/type";
+import { Input } from "atoms/login";
+import { Top } from "organisms/login";
+import { Button, Text } from "@shared/components";
+
+import { TInput } from "@shared/types/login";
+
+import { getAccessToken } from "./service";
 
 export default function Login() {
-  const { register, getValues, handleSubmit } = useForm<TInput>();
+  const formMethod = useForm<TInput>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const { mutate } = useMutation(getAccessToken);
 
   const { push } = useRouter();
 
-  const handleSubmitClick = () => {
+  const handleSubmitClick = (data: TInput) => {
     mutate(
-      {
-        email: getValues("email"),
-        password: getValues("password"),
-      },
+      { ...data },
       {
         onSuccess: (res) => {
           if (res.result) push("/");
@@ -32,33 +38,23 @@ export default function Login() {
   };
 
   return (
-    <form className={styles.wrapper} onSubmit={handleSubmit(handleSubmitClick)}>
-      <Image src="/images/logo.svg" alt="logo" width={150} height={150} />
-      <p className={styles.title}>Sign in</p>
+    <FormProvider {...formMethod}>
+      <form className={style.wrapper} onSubmit={formMethod.handleSubmit(handleSubmitClick)}>
+        <Top />
 
-      <div className={styles.inputContainer}>
-        <input type="text" required {...register("email")} />
-        <label className={styles.label} htmlFor="email">
-          Email
-        </label>
-      </div>
+        <Input type="text" registerName="email" text="Email" required />
+        <Input type="password" registerName="password" text="Password" required autoComplete="off" />
 
-      <div className={styles.inputContainer}>
-        <input type="password" required autoComplete="off" {...register("password")} />
-        <label className={styles.label} htmlFor="password">
-          Password
-        </label>
-      </div>
+        <Text className={style.forgot}>Forgot your password?</Text>
 
-      <p className={styles.forgot}>Forgot your password?</p>
+        <Button type="submit" className={style.submit}>
+          Sign in
+        </Button>
 
-      <button type="submit" className={styles.submit}>
-        Sign in
-      </button>
-
-      <p className={styles.signup}>
-        Don&#39;t have an account&#63; <span>Sign up</span>
-      </p>
-    </form>
+        <Text className={style.signup}>
+          Don&#39;t have an account&#63; <span>Sign up</span>
+        </Text>
+      </form>
+    </FormProvider>
   );
 }

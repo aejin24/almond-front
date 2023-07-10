@@ -9,9 +9,13 @@
   - templates
   - utils
   - styles (global)
-- [page]
+- components
   - atoms
   - organisms
-  - page.tsx (template)
+  - pages?
+  - templates?
+- [pages]
+  - index.tsx
+  - utils
   - hooks
   - style.module.scss

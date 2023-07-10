@@ -1,5 +1,6 @@
 import axios from "axios";
-import { TAxiosReturn } from "../../@shared/types/common";
+
+import { TAxiosReturn } from "@shared/types/common";
 import { TGetAccessToken } from "./type";
 
 export const getAccessToken = async ({ email, password }: TGetAccessToken) => {
