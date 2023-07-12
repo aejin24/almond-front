@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const user = userList.find((u) => u.email === email && u.password === password);
 
-    if (user !== null) {
+    if (user) {
       if (password === user?.password) {
         try {
           // 토큰 유효시간 3H
@@ -47,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     } else {
       res.status(500).json({
-        data: { code: 1002, message: "아이디와 비밀번호가 일치하지 않습니다." },
+        data: { code: 1002, message: "아이디와 비밀번호가 일치하지 않거나, 회원 정보가 없습니다." },
       });
     }
   } else {
