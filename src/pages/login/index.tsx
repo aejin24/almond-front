@@ -42,26 +42,26 @@ const Login: TNextPageWithLayout = () => {
 
   return (
     <FormProvider {...formMethod}>
-      <form onSubmit={formMethod.handleSubmit(handleSubmitClick)}>
-        <Input type="text" registerName="email" text="Email" required />
-        <Input type="password" registerName="password" text="Password" required autoComplete="off" />
+      <form className={style.wrapper} onSubmit={formMethod.handleSubmit(handleSubmitClick)}>
+        <Input type="text" registerName="email" text="이메일" required />
+        <Input type="password" registerName="password" text="비밀번호" required autoComplete="off" />
 
-        <Text className={style.forgot}>Forgot your password?</Text>
+        <Text className={style.forgot}>비밀번호를 잊으셨나요&#63;</Text>
 
         <Button type="submit" className={style.submit}>
-          Sign in
+          로그인
         </Button>
 
         <Text className={style.signup}>
-          Don&#39;t have an account&#63; <Link href="/register">Sign up</Link>
+          새로운 뉴스레터를 만나보세요&#33; <Link href="/register">회원가입</Link>
         </Text>
       </form>
     </FormProvider>
   );
 };
 
-Login.getLayout = function getLayout(page: ReactElement) {
-  return <LoginLayout text="Sign in">{page}</LoginLayout>;
+Login.getLayout = (page: ReactElement) => {
+  return <LoginLayout text="로그인">{page}</LoginLayout>;
 };
 
 export default Login;

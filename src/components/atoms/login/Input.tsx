@@ -15,7 +15,7 @@ export default function Input({ registerName, text, ...props }: TProps) {
 
   return (
     <InputContainer>
-      <input {...register(registerName)} {...props} />
+      <input id={registerName} {...register(registerName)} {...props} />
       <Label htmlFor={registerName}>{text}</Label>
     </InputContainer>
   );
