@@ -1,15 +1,20 @@
+import { TRegisterInput } from "@shared/types/register";
 import { ComponentProps } from "react";
+import { useFormContext } from "react-hook-form";
 import styled from "styled-components";
 
 type TProps = {
+  registerName: "email" | "nickname" | "birth" | "password" | "passwordConfirm";
   label: string;
 } & ComponentProps<"input">;
 
-export default function Input({ label, ...props }: TProps) {
+export default function Input({ registerName, label, ...props }: TProps) {
+  const { register } = useFormContext<TRegisterInput>();
+
   return (
     <Wrapper>
       <Label htmlFor={props.id}>{label}</Label>
-      <input {...props} />
+      <input {...register(registerName)} {...props} />
     </Wrapper>
   );
 }
