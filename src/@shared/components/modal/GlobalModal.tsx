@@ -1,8 +1,8 @@
 import { createContext, PropsWithChildren, useState } from "react";
 
-import { modalList } from "../../utils/modalList";
-
 import { ModalType } from "../../types/common";
+
+import { Dialog, Loading } from ".";
 
 type TShow = <T>(type: ModalType, props?: T) => void;
 
@@ -13,6 +13,11 @@ type TGlobalModalContextProps = {
     type: number;
     props: {};
   };
+};
+
+const modalList: any = {
+  [ModalType.LOADING]: Loading,
+  [ModalType.DIALOG]: Dialog,
 };
 
 export const GlobalModalContext = createContext<TGlobalModalContextProps>({
