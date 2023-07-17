@@ -31,7 +31,7 @@ const Wrapper = styled.div`
     outline: none;
     border: 1px solid var(--GRAY5);
     border-radius: 8px;
-    padding-left: 12px;
+    padding: 0 12px;
 
     &:focus {
       border-color: var(--BLUE7);

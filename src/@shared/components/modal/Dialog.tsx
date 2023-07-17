@@ -1,14 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-type TProps = {
-  type: "ALERT" | "CONFIRM" | "SUBMIT";
-  title: string;
-  cancelText?: string;
-  submitText: string;
-  handleSubmitBtnClick: () => void;
-  handleCancelBtnClick?: () => void;
-};
+import { TDialogProps } from "@shared/types/common";
 
 export default function Dialog({
   type,
@@ -17,7 +10,7 @@ export default function Dialog({
   submitText,
   handleSubmitBtnClick,
   handleCancelBtnClick,
-}: TProps) {
+}: TDialogProps) {
   return (
     <Wrapper>
       <Container>
@@ -30,6 +23,7 @@ export default function Dialog({
               {cancelText}
             </Cancel>
           )}
+
           <Submit type="button" onClick={handleSubmitBtnClick}>
             {submitText}
           </Submit>

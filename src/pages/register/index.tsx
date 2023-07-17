@@ -8,8 +8,10 @@ import LoginLayout from "@shared/layout/LoginLayout";
 import { Button, PageTransition } from "@shared/components/other";
 import { Input } from "atoms/register";
 
-import { TNextPageWithLayout } from "@shared/types/common";
+import { ModalType, TDialogProps, TNextPageWithLayout } from "@shared/types/common";
 import { TRegisterInput } from "@shared/types/register";
+
+import useModal from "@shared/hooks/useModal";
 
 const Register: TNextPageWithLayout = () => {
   const formMethod = useForm<TRegisterInput>({
@@ -22,21 +24,31 @@ const Register: TNextPageWithLayout = () => {
     },
   });
 
+  const { show, hide } = useModal();
+
   const handleSubmitClick = (data: TRegisterInput) => {
-    // do something
-    console.log(data);
+    if (data.password !== data.passwordConfirm) {
+      show<TDialogProps>(ModalType.DIALOG, {
+        type: "ALERT",
+        title: "비밀번호가 일치하지 않습니다.",
+        submitText: "확인",
+        handleSubmitBtnClick: hide,
+      });
+
+      return;
+    }
   };
 
   return (
     <PageTransition>
       <FormProvider {...formMethod}>
-        <form>
+        <form action="POST" onSubmit={formMethod.handleSubmit(handleSubmitClick)}>
           <Input registerName="email" label="이메일" type="text" name="email" id="email" required />
           <Input registerName="nickname" label="닉네임" type="text" name="nickname" id="nickname" required />
           <Input
             registerName="birth"
             label="생년월일"
-            type="text"
+            type="date"
             name="birth"
             id="birth"
             placeholder="숫자만 입력해주세요 :)"
