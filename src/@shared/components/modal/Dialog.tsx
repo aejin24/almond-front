@@ -62,7 +62,7 @@ const Container = styled.div`
 const Title = styled.p`
   font-size: 20px;
   font-weight: 700;
-  margin: 16px 0;
+  margin: 32px 0;
   text-align: center;
 `;
 
