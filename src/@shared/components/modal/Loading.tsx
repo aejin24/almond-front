@@ -18,11 +18,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #0000004d;
-
-  img {
-    display: block;
-    margin: 0 auto;
-  }
 `;
 
 const spinner = keyframes`

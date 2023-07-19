@@ -37,6 +37,10 @@ const Register: TNextPageWithLayout = () => {
 
       return;
     }
+
+    // do something
+
+    show(ModalType.LOADING);
   };
 
   return (
