@@ -61,7 +61,7 @@ const Container = styled.div`
 
 const Title = styled.p`
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
   margin: 32px 0;
   text-align: center;
 `;
@@ -77,6 +77,7 @@ const BtnWrapper = styled.div`
     height: 40px;
     cursor: pointer;
     border-radius: 8px;
+    font-size: 13px;
   }
 `;
 
